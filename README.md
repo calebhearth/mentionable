@@ -3,6 +3,8 @@
 An implementation of [Webmention], a web standard for mentions and conversyions
 across the web. With mentionable, people can reply by sending webmentions for:
 
+[Webmention]: <https://www.w3.org/TR/webmention/> "Webmention W3C Recommendation"
+
 - commenting
 - liking
 - reposting
@@ -20,6 +22,8 @@ Optionally, Mentionable can be configured to send Webmentions when content you
 create links to external sites. It does this by querying the link, performing
 [Webmention endpoint discovery], and notifying sites that are set up to receive
 Webmentions.
+
+[Webmention endpoint discovery]: <https://www.w3.org/TR/webmention/#sender-discovers-receiver-webmention-endpoint>
 
 You can configure one or more objects to be queried upon creation by telling
 Mentionable what they are and what method to check for links.
