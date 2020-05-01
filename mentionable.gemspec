@@ -7,23 +7,14 @@ require "mentionable/version"
 Gem::Specification.new do |spec|
   spec.name        = "mentionable"
   spec.version     = Mentionable::VERSION
-  spec.authors     = ["Caleb Thompson"]
-  spec.email       = ["caleb@calebthompson.io"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of Mentionable."
-  spec.description = "TODO: Description of Mentionable."
-  spec.license     = "MIT"
+  spec.authors     = ["Caleb Hearth"]
+  spec.email       = ["caleb@calebhearth.com"]
+  spec.homepage    = "https://github.com/calebthompson/mentionable"
+  spec.summary     = "Webmentions on Rails"
+  spec.description = "Webmention sending and receiving for Rails projects."
+  spec.license     = "Hippocratic 2.1"
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
-
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE.md", "Rakefile", "README.md"]
 
   spec.add_dependency "rails", "~> 6.0.2", ">= 6.0.2.2"
 

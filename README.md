@@ -1,5 +1,28 @@
 # Mentionable
-Short description and motivation.
+
+An implementation of [Webmention], a web standard for mentions and conversyions
+across the web. With mentionable, people can reply by sending webmentions for:
+
+- commenting
+- liking
+- reposting
+- mentioning / linking to
+- quote
+
+The `h-entry` specification provides for more types of reply, but these are what
+Mentionable currently supports.
+
+Mentionable sets up an endpoint in your Rails app to receive these Webmentions,
+confirms that the reply actually links back to a page you've published, and
+stores replies in the database for you to display or use as you please.
+
+Optionally, Mentionable can be configured to send Webmentions when content you
+create links to external sites. It does this by querying the link, performing
+[Webmention endpoint discovery], and notifying sites that are set up to receive
+Webmentions.
+
+You can configure one or more objects to be queried upon creation by telling
+Mentionable what they are and what method to check for links.
 
 ## Usage
 How to use my plugin.
@@ -25,4 +48,5 @@ $ gem install mentionable
 Contribution directions go here.
 
 ## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+See LICENSE.md
