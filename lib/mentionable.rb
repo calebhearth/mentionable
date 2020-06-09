@@ -1,5 +1,5 @@
 require "mentionable/engine"
+require "mentionable/configuration"
 
 module Mentionable
-  # Your code goes here...
 end
