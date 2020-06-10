@@ -15,7 +15,7 @@ module Mentionable
 
     def initialize
       @verification_job = Mentionable::VerifyWithRouterJob
-      @persistence_job = nil
+      @persistence_job = Mentionable::SaveMentionJob
     end
   end
 
