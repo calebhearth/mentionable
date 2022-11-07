@@ -1,8 +1,0 @@
-en:
-  activerecord:
-    errors:
-      models:
-        mentionable/mention:
-          attributes:
-            target:
-              not_different: 'must be not equal to %{other}'

@@ -5,7 +5,7 @@ module Mentionable
   class SaveMentionJobTest < ActiveJob::TestCase
     test 'saves a valid mention' do
       assert_changes(-> () { Mentionable::Mention.count }) do
-        SaveMentionJob.perform_now('soure', 'target')
+        SaveMentionJob.perform_now('source', 'target')
       end
     end
 
