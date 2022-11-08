@@ -2,6 +2,8 @@ require_dependency "mentionable/application_controller"
 
 module Mentionable
   class MentionsController < ApplicationController
+    skip_forgery_protection
+
     def create
       source = URI(params.fetch(:source) { missing_source_or_target; return })
       target = URI(params.fetch(:target) { missing_source_or_target; return })
