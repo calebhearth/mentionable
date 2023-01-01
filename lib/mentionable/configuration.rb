@@ -1,10 +1,12 @@
 module Mentionable
   class Configuration
-    # The Mentionable verification job to use when a new webmention is received.
+    # The Mentionable request verification job to use when a new webmention is
+    # received. It is responsible for verifying the webmention per
+    # https://www.w3.org/TR/webmention/#request-verification
     #
     # Defaults to {VerifyWithRouterJob}
-    # @return Mentionable verification job
-    attr_accessor :verification_job
+    # @return Mentionable request verification job
+    attr_accessor :request_verification_job
 
     # The Mentionable persistence job is used when a source and target have been
     # successfully verified to save the webmention.
@@ -14,7 +16,7 @@ module Mentionable
     attr_accessor :persistence_job
 
     def initialize
-      @verification_job = Mentionable::VerifyWithRouterJob
+      @request_verification_job = Mentionable::VerifyWithRouterJob
       @persistence_job = Mentionable::SaveMentionJob
     end
   end
@@ -36,7 +38,7 @@ module Mentionable
   # @yieldparam [Mentionable::Configuration] config current Mentionable config
   # ```
   # Mentionable.configure do |config|
-  #   config.verification_job = Mentionable::VerifyWithRouterJob
+  #   config.request_verification_job = Mentionable::VerifyWithRouterJob
   # end
   # ```
   def self.configure

@@ -26,7 +26,7 @@ module Mentionable
         end
       end
 
-      Mentionable.config.verification_job.perform_later(source.to_s, target.to_s)
+      Mentionable.config.request_verification_job.perform_later(source.to_s, target.to_s)
 
       head :accepted
     end
