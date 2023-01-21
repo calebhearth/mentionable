@@ -5,7 +5,8 @@ module Mentionable
   #
   # Verifies that the Rails router has a path that matches the target URL's
   # path. If this is the case, pass source and target to
-  # {Mentionable.config.persistence_job}, otherwise discard them.
+  # {Mentionable::Configuration#persistence_job
+  # Mentionable.config.persistence_job}, otherwise discard them.
   class VerifyWithRouterJob < ApplicationJob
     queue_as :default
 

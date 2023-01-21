@@ -20,7 +20,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activemodel"
   spec.add_dependency "activerecord"
   spec.add_dependency "activesupport"
+  spec.add_dependency "microformats"
   spec.add_dependency "railties"
 
+  spec.add_development_dependency "mocktail"
   spec.add_development_dependency "pg"
+  spec.add_development_dependency "yard"
 end
