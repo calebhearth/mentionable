@@ -5,29 +5,35 @@ module Mentionable
   class SaveMentionJobTest < ActiveJob::TestCase
     test 'saves a valid mention' do
       Mocktail.replace(Mentionable::ConfirmMentionJob)
-      assert_changes(-> () { Mentionable::Mention.count }) do
-        SaveMentionJob.perform_now('a source', 'a target')
+      assert_changes(-> () { Mentionable::Mention.awaiting_verification.count }) do
+        SaveMentionJob.perform_now(source: 'a source', target: 'a target', valid: true)
+      end
+    end
+
+    test 'saves an invalid mention' do
+      Mocktail.replace(Mentionable::ConfirmMentionJob)
+      assert_changes(-> () { Mentionable::Mention.target_not_recognized.count }) do
+        SaveMentionJob.perform_now(source: 'a source', target: 'a target', valid: false)
       end
     end
 
     test 'kicks off a verification job' do
+      source = 'a source'
+      target = 'a target'
+      status = :awaiting_verification
       Mocktail.replace(Mentionable::Mention)
-      Mocktail.replace(Mentionable::ConfirmMentionJob)
-      stubs { Mentionable::Mention.create!({ source: 'a source', target: 'a target' }) }
+      stubs { Mentionable::Mention.create!({ source:, target:, status: }) }
         .with { :a_mention }
 
-      SaveMentionJob.perform_now('a source', 'a target')
-
-      verify do
-        Mentionable.config.webmention_verification_job
-          .perform_later(:a_mention)
+      assert_enqueued_with(job: Mentionable::ConfirmMentionJob, args: [:a_mention]) do
+        SaveMentionJob.perform_now(source:, target:, valid: true)
       end
     end
 
     test 'no persistence if source, target result in invalid mention' do
       assert_no_enqueued_jobs do
         assert_raises(ActiveRecord::RecordInvalid) do
-          SaveMentionJob.perform_now('same', 'same')
+          SaveMentionJob.perform_now(source: 'same', target: 'same', valid: true)
         end
       end
     end
