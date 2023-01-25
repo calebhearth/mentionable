@@ -36,7 +36,7 @@ class Mentionable::ConfirmMentionJobTest < ActiveJob::TestCase
     stubs { Net::HTTP.get(URI(mention.source)) }.with { html }
 
     Mentionable::ConfirmMentionJob.perform_now(mention, cache: false)
-    assert_equal nil, mention.html
+    assert_nil mention.html
     assert_equal "verified", mention.status
   end
 
