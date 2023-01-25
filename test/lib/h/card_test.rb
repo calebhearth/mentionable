@@ -29,12 +29,12 @@ class H::CardTest < ActiveSupport::TestCase
     assert_equal ["physicist"], card.categories
     assert_equal [
       "1600 Pennsylvania Ave NW, Washington, DC 20500",
-      H::Adr.new(
-        street_address: "17 Austerstræti",
-        locality: "Reykjavík",
-        postal_code: "107",
-        country_name: "Iceland"
-      ),
+      H::Adr.new(properties: {
+        street_address: ["17 Austerstræti"],
+        locality: ["Reykjavík"],
+        postal_code: ["107"],
+        country_name: ["Iceland"],
+      }),
     ], card.adrs
     assert_equal "123 Main st.", card.street_address
     assert_equal "Los Angeles", card.locality
@@ -52,18 +52,25 @@ class H::CardTest < ActiveSupport::TestCase
     assert_equal "female", card.gender_identity
     assert_equal Date.new(1983, 6, 18), card.anniversary
     assert_equal [
-      H::Adr.new(
-        label: "3 Charlotte Road,\n      City of London,\n      EC2A 3PE,\n      UK",
-        street_address: "3 Charlotte Road",
-        locality: "City of London",
-        postal_code: "EC2A 3PE",
-        country_name: "UK",
-        geo: "51.526421;-0.081067",
-      ),
-      H::Adr.new(
-        geo: "geo:51.526421;-0.081067;crs=wgs84;u=40",
-        locality: "London",
-      ),
+      H::Adr.new(properties: {
+        label: ["3 Charlotte Road,\n      City of London,\n      EC2A 3PE,\n      UK"],
+        street_address: ["3 Charlotte Road"],
+        locality: ["City of London"],
+        postal_code: ["EC2A 3PE"],
+        country_name: ["UK"],
+        geo: ["51.526421;-0.081067"],
+      }),
+      H::Adr.new(properties: {
+        geo: ["geo:51.526421;-0.081067;crs=wgs84;u=40"],
+        locality: ["London"],
+      }),
     ], card.children
+  end
+
+  test "inspect omits empty values" do
+    assert_match(
+      /\A#<H::Card:\d+ @name="Jesse Cooke">\z/,
+      H::Card.new(properties: { "name" => ["Jesse Cooke"] }).inspect,
+    )
   end
 end
