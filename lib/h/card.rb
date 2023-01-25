@@ -39,6 +39,7 @@ class H::Card
   attr_reader :sex
   attr_reader :gender_identity
   attr_reader :anniversary
+  attr_reader :children
 
   def self.from_html(html)
     new(
@@ -67,9 +68,7 @@ class H::Card
     @categories = card_hash[:properties][:category]
     @adrs = card_hash[:properties][:adr]&.map do |adr|
       if adr.is_a?(Hash)
-        vals = adr[:properties].to_h { |k, v| [k.underscore.to_sym, v.first] }
-        puts vals.inspect
-        H::Adr.new(**vals)
+        H::Adr.from_properties(adr[:properties])
       else
         adr
       end
@@ -89,5 +88,6 @@ class H::Card
     @sex = card_hash[:properties][:sex]&.first
     @gender_identity = card_hash[:properties][:"gender-identity"]&.first
     @anniversary = (date = card_hash[:properties][:anniversary]&.first) && Date.parse(date)
+    @children = card_hash[:children]&.flat_map { H.parse([_1]) }
   end
 end

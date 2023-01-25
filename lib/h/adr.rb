@@ -12,6 +12,10 @@ H::Adr = Data.define(
   :longitude,
   :altitude,
 ) do
+  def self.from_properties(properties)
+    new(**properties.to_h { |k, v| [k.underscore.to_sym, v.first] })
+  end
+
   def initialize(
     street_address: nil,
     extended_address: nil,
@@ -24,7 +28,8 @@ H::Adr = Data.define(
     geo: nil,
     latitude: nil,
     longitude: nil,
-    altitude: nil
+    altitude: nil,
+    name: nil # will be ignored per https://microformats.org/wiki/h-adr#:~:text=there%20is%20no%20%22p%2Dname%22%20property%20in%20h%2Dadr
   )
     super(
       street_address:,
