@@ -6,19 +6,27 @@ module H
 
     def parse(items)
       items.map do |item|
-        item = item.to_hash.with_indifferent_access
-        case item[:type].first
-        when "h-card"
-          H::Card.new(properties: item[:properties], children: item[:children])
-        when "h-adr"
-          H::Adr.new(properties: item[:properties], children: item[:children])
-        else
+        if item.is_a? String
           item
+        else
+          item = item.to_hash.with_indifferent_access
+          case item[:type].first
+          when "h-adr"
+            H::Adr.new(properties: item[:properties], children: item[:children])
+          when "h-card"
+            H::Card.new(properties: item[:properties], children: item[:children])
+          when "h-entry"
+            H::Entry.new(properties: item[:properties], children: item[:children])
+          else
+            item
+          end
         end
       end
     end
   end
 end
 
+require "h/base"
 require "h/adr"
 require "h/card"
+require "h/entry"
