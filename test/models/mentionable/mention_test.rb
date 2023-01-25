@@ -27,6 +27,17 @@ module Mentionable
       assert valid_mention.valid?
     end
 
+    def test_microformat_items
+      assert_equal [H::Card.new(properties: {
+        name: ["Jesse Cooke"],
+        nickname: ["jc00ke"],
+        photo: ["https://example.com/photo.jpeg"],
+        url: ["https://example.com/@jc00ke", "https://example.com"],
+        uid: [ "tag:example.com,2013:jc00ke"],
+      })], Mention.new(html: File.read("test/fixtures/h-card.html"))
+        .microformat_items
+    end
+
     def valid_mention
       Mention.new(
         target: "https://www.example.com/target",

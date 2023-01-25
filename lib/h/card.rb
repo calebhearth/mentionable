@@ -90,4 +90,8 @@ class H::Card
     @anniversary = (date = card_hash[:properties][:anniversary]&.first) && Date.parse(date)
     @children = card_hash[:children]&.flat_map { H.parse([_1]) }
   end
+
+  def ==(other)
+    other.is_a?(H::Card) && instance_values == other.instance_values
+  end
 end

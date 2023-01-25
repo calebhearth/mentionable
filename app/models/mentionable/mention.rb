@@ -10,5 +10,9 @@ module Mentionable
       :verified,
       :failed,
     ].to_h { [_1, _1.to_s] }
+
+    def microformat_items
+      H.from_html(html)
+    end
   end
 end
