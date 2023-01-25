@@ -15,6 +15,8 @@ module H
             H::Adr.new(properties: item[:properties], children: item[:children])
           when "h-card"
             H::Card.new(properties: item[:properties], children: item[:children])
+          when "h-cite"
+            H::Cite.new(properties: item[:properties], children: item[:children])
           when "h-entry"
             H::Entry.new(properties: item[:properties], children: item[:children])
           else
@@ -29,4 +31,5 @@ end
 require "h/base"
 require "h/adr"
 require "h/card"
+require "h/cite"
 require "h/entry"
