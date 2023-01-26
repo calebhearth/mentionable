@@ -34,7 +34,7 @@ class H::Base
     end
     self.class.date_attributes.each do |attribute|
       if (date = properties[attribute]&.first)
-        instance_variable_set("@#{attribute}", Date.parse(date))
+        instance_variable_set("@#{attribute}", DateTime.parse(date))
       end
     end
     @children = children&.flat_map { H.parse([_1]) }

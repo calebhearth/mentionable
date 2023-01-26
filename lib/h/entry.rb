@@ -36,7 +36,7 @@ class H::Entry < H::Base
   end
 
   def self.plural_attributes
-    %i[categories syndications comments photos videos audios likes reposts]
+    %i[categories syndications comments photos videos audios likes reposts in_reply_to]
   end
 
   def self.date_attributes = %i[published updated]
