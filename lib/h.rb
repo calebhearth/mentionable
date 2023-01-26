@@ -10,7 +10,7 @@ module H
           item
         else
           item = item.to_hash.with_indifferent_access
-          case item[:type].first
+          case item[:type]&.first
           when "h-adr"
             H::Adr.new(properties: item[:properties], children: item[:children])
           when "h-card"
