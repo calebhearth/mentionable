@@ -35,7 +35,7 @@ How to use my plugin.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mentionable'
+gem 'hearthside-mentionable', require: 'mentionable'
 ```
 
 And then execute:
@@ -45,7 +45,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install mentionable
+$ gem install hearthside-mentionable
 ```
 
 ## Contributing
