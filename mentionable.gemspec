@@ -5,7 +5,7 @@ require "mentionable/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
-  spec.name        = "mentionable"
+  spec.name        = "hearthside-mentionable"
   spec.version     = Mentionable::VERSION
   spec.authors     = ["Caleb Hearth"]
   spec.email       = ["caleb@calebhearth.com"]
