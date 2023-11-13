@@ -5,8 +5,8 @@ class H::EntryTest < ActiveSupport::TestCase
     entry = H::Entry.from_html(File.read("test/fixtures/h-entry-complex.html"))
 
     assert_equal "Microformats are amazing", entry.name
-    assert_equal Date.new(2013, 6, 13, 12), entry.published
-    assert_equal Date.new(2013, 6, 14, 12), entry.updated
+    assert_equal DateTime.new(2013, 6, 13, 12), entry.published
+    assert_equal DateTime.new(2013, 6, 14, 12), entry.updated
     assert_equal ["microformats"], entry.categories
     assert_equal "http://example.com/2013/06/microformats-are-amazing", entry.url
     assert_equal "http://example.com/2013/06/microformats-are-amazing", entry.uid
@@ -16,14 +16,14 @@ class H::EntryTest < ActiveSupport::TestCase
       }), entry.location
     assert_equal ["https://other.example.com/2013/06/microformats-are-amazing"],
       entry.syndications
-    assert_equal "http://example.com/reply-to", entry.in_reply_to
+    assert_equal ["http://example.com/reply-to"], entry.in_reply_to
     assert_equal "YES", entry.rsvp
     assert_equal "http://example.com/like-of", entry.like_of
     assert_equal "http://example.com/repost-of", entry.repost_of
     assert_equal "A comment", entry.comments.first
     comment = entry.comments.last
     assert comment.class, H::Cite
-    assert_equal Date.new(2013, 06, 14), comment.published
+    assert_equal DateTime.new(2013, 06, 14), comment.published
     assert_equal H::Card.new(properties: { name: ["Some One"] }), comment.author
     assert_equal "http://example.com/comment", comment.url
     assert_equal "Some One commented:", comment.name
